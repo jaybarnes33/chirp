@@ -3,12 +3,12 @@ import Head from "next/head";
 import { SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
 import { api } from "@/utils/api";
 import CreatePost from "@/components/CreatePost";
-import Image from "next/image";
 import Post from "@/components/Post";
+import { LoadingPage } from "@/components/Loading";
 
 const Home: NextPage = () => {
   const user = useUser();
-  const { data } = api.post.getAll.useQuery();
+  const { data, isLoading } = api.post.getAll.useQuery();
   console.log(user.user);
   return (
     <>
@@ -22,28 +22,34 @@ const Home: NextPage = () => {
           <div className="border-b border-slate-400 p-2">
             {!user.isSignedIn ? <SignInButton /> : <SignOutButton />}
           </div>
-          <CreatePost />
-          <div className="grid w-full ">
-            {data?.map((post) => (
-              <Post post={post} key={post.post.id} />
-            ))}
-            {data?.map((post) => (
-              <Post post={post} key={post.post.id} />
-            ))}
-            {data?.map((post) => (
-              <Post post={post} key={post.post.id} />
-            ))}
-            {data?.map((post) => (
-              <Post post={post} key={post.post.id} />
-            ))}
-            {data?.map((post) => (
-              <Post post={post} key={post.post.id} />
-            ))}
-            {data?.map((post) => (
-              <Post post={post} key={post.post.id} />
-            ))}
-          </div>
-          <h1>Welcome {user.user?.username}</h1>
+          {user.user?.username && <CreatePost />}
+          {!isLoading ? (
+            <>
+              <div className="grid w-full ">
+                {data?.map((post) => (
+                  <Post post={post} key={post.post.id} />
+                ))}
+                {data?.map((post) => (
+                  <Post post={post} key={post.post.id} />
+                ))}
+                {data?.map((post) => (
+                  <Post post={post} key={post.post.id} />
+                ))}
+                {data?.map((post) => (
+                  <Post post={post} key={post.post.id} />
+                ))}
+                {data?.map((post) => (
+                  <Post post={post} key={post.post.id} />
+                ))}
+                {data?.map((post) => (
+                  <Post post={post} key={post.post.id} />
+                ))}
+              </div>
+              <h1>Welcome {user.user?.username}</h1>
+            </>
+          ) : (
+            <LoadingPage />
+          )}
         </div>
       </main>
     </>
