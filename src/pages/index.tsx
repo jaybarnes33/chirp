@@ -3,8 +3,7 @@ import Head from "next/head";
 import { useUser } from "@clerk/nextjs";
 import { api } from "@/utils/api";
 import CreatePost from "@/components/CreatePost";
-import Post from "@/components/Post";
-import { LoadingPage } from "@/components/Loading";
+
 import Feed from "@/components/Feed";
 
 const Home: NextPage = () => {
@@ -19,7 +18,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex justify-center">
-        <div className="h-screen w-full border-x border-slate-400 md:max-w-2xl">
+        <div className="h-screen w-full border-slate-400 md:max-w-2xl md:border-x">
           {user.user?.username && <CreatePost />}
           <Feed />
         </div>

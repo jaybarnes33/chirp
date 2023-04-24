@@ -3,7 +3,7 @@ import { useUser } from "@clerk/nextjs";
 import Image from "next/image";
 import React, { useState } from "react";
 import Loading from "./Loading";
-
+import toast from "react-hot-toast";
 const CreatePost = () => {
   const { user } = useUser();
   const ctx = api.useContext();
@@ -11,6 +11,14 @@ const CreatePost = () => {
     onSuccess: () => {
       setText("");
       void ctx.post.getAll.invalidate();
+    },
+    onError: (e) => {
+      const errorMessage = e.data?.zodError?.fieldErrors.content;
+      if (errorMessage && errorMessage[0]) {
+        toast.error(errorMessage[0]);
+      } else {
+        toast.error("Couldn't post please try again");
+      }
     },
   });
 
@@ -22,7 +30,7 @@ const CreatePost = () => {
   };
   return user ? (
     <form
-      className="flex gap-2 border-b border-slate-400 p-2"
+      className="flex gap-2 border-b border-slate-400 p-2 py-5"
       onSubmit={handleSubmit}
     >
       {" "}
@@ -38,6 +46,7 @@ const CreatePost = () => {
         placeholder="What's on your mind?"
         autoFocus
         value={text}
+        rows={3}
         onChange={(e) => setText(e.target.value)}
         minLength={5}
         required
@@ -46,7 +55,7 @@ const CreatePost = () => {
         disabled={!text || isLoading}
         className="mt-auto flex items-center gap-2 rounded-full bg-blue-500 p-2 px-5 disabled:bg-transparent"
       >
-        Chirp {isLoading && <Loading size={15} />}
+        {isLoading ? <Loading size={15} /> : "Chirp"}
       </button>
     </form>
   ) : null;
