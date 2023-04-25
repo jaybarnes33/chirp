@@ -17,13 +17,12 @@ const Home: NextPage = () => {
         <meta name="description" content="Connect with your people " />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="flex justify-center">
-        <div className="min-h-screen w-full border-slate-400 md:max-w-2xl md:border-x">
-          {!user ? <SignInButton /> : <SignOutButton />}
-          {user?.username && <CreatePost />}
-          <Feed />
-        </div>
-      </main>
+
+      <div className="min-h-screen w-full border-slate-400 md:max-w-2xl md:border-x">
+        {!user ? <SignInButton /> : <SignOutButton />}
+        {user?.username && <CreatePost />}
+        <Feed />
+      </div>
     </>
   );
 };

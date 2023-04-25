@@ -5,12 +5,15 @@ import { api } from "@/utils/api";
 import "@/styles/globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "react-hot-toast";
+import Layout from "@/components/Layout";
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
     <ClerkProvider>
       <Toaster />
-
-      <Component {...pageProps} />
+      <Layout>
+        {" "}
+        <Component {...pageProps} />
+      </Layout>
     </ClerkProvider>
   );
 };

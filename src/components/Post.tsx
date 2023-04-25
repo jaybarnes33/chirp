@@ -21,9 +21,7 @@ const Post = ({ post }: { post: RouterOutputs["post"]["getAll"][number] }) => {
           <Link href={`/@${post.author?.username as string}`}>
             <span className="font-semibold">@{post.author?.username}</span>
           </Link>
-          <span className="font-thin">
-            · {dayjs(post.post.createdAt).fromNow()}
-          </span>
+          <small>· {dayjs(post.post.createdAt).fromNow()}</small>
           {}
         </div>
         <Link href={`/posts/${post.post.id}`}>{post.post?.content}</Link>

@@ -26,7 +26,7 @@ const Slug = () => {
   return isLoading || isFetching ? (
     <LoadingPage />
   ) : (
-    <main className="flex justify-center">
+    <>
       {!data ? (
         toast("Couldn't fetch profile")
       ) : (
@@ -53,7 +53,7 @@ const Slug = () => {
           ;
         </div>
       )}
-    </main>
+    </>
   );
 };
 

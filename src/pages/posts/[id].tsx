@@ -12,11 +12,11 @@ const PostPage = () => {
     id: id as string,
   });
   return (
-    <main className="flex justify-center">
+    <>
       <div className="min-h-screen w-full border-slate-400 md:max-w-2xl md:border-x">
         {data && <Post post={data} />}
       </div>
-    </main>
+    </>
   );
 };
 
