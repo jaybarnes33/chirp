@@ -9,7 +9,7 @@ import Feed from "@/components/Feed";
 const Home: NextPage = () => {
   const user = useUser();
   api.post.getAll.useQuery();
-  console.log(user.user);
+
   return (
     <>
       <Head>
@@ -18,7 +18,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex justify-center">
-        <div className="h-screen w-full border-slate-400 md:max-w-2xl md:border-x">
+        <div className="min-h-screen w-full border-slate-400 md:max-w-2xl md:border-x">
           {user.user?.username && <CreatePost />}
           <Feed />
         </div>

@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import Loading from "./Loading";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
+import Avatar from "./Avatar";
 const CreatePost = () => {
   const {
     query: { slug },
@@ -37,21 +38,13 @@ const CreatePost = () => {
   };
   return user ? (
     <form
-      className="flex gap-2 border-b border-slate-400 p-2 py-5"
+      className="flex gap-2 border-b border-slate-400 p-2 py-5 "
       onSubmit={handleSubmit}
     >
-      {" "}
-      <Image
-        width={60}
-        height={60}
-        className="h-10 w-10 rounded-full"
-        src={user.profileImageUrl}
-        alt={(user?.username as string) + "'s Avatar"}
-      />
+      <Avatar size={75} user={user} />
       <textarea
-        className="flex-1 grow bg-transparent text-slate-200 focus:outline-none"
+        className="flex-1 grow bg-transparent text-slate-200 focus:border-b focus:border-slate-400 focus:outline-none"
         placeholder="What's on your mind?"
-        autoFocus
         value={text}
         rows={3}
         onChange={(e) => setText(e.target.value)}
@@ -60,7 +53,7 @@ const CreatePost = () => {
       />
       <button
         disabled={!text || isLoading}
-        className="mt-auto flex items-center gap-2 rounded-full bg-blue-500 p-2 px-5 disabled:bg-transparent"
+        className="mt-auto flex items-center gap-2 rounded-full bg-blue-500 p-1 px-5 disabled:bg-transparent"
       >
         {isLoading ? <Loading size={15} /> : "Chirp"}
       </button>
