@@ -23,6 +23,26 @@ export const postRouter = createTRPCRouter({
       author: users.find((user) => user.id === post.authorId),
     }));
   }),
+  getUserPosts: publicProcedure
+    .input(z.object({ userId: z.string() }))
+    .query(async ({ ctx, input }) => {
+      const posts = await ctx.prisma.post.findMany({
+        where: {
+          authorId: input.userId,
+        },
+        take: 100,
+        orderBy: { createdAt: "desc" },
+      });
+
+      const users = await clerkClient.users.getUserList({
+        userId: posts.map((post) => post.authorId),
+      });
+
+      return posts.map((post) => ({
+        post,
+        author: users.find((user) => user.id === post.authorId),
+      }));
+    }),
   create: privateProcedure
     .input(z.object({ content: z.string() }))
     .mutation(async ({ ctx, input }) => {

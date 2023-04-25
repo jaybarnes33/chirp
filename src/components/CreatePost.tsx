@@ -4,13 +4,20 @@ import Image from "next/image";
 import React, { useState } from "react";
 import Loading from "./Loading";
 import toast from "react-hot-toast";
+import { useRouter } from "next/router";
 const CreatePost = () => {
+  const {
+    query: { slug },
+  } = useRouter();
+
   const { user } = useUser();
   const ctx = api.useContext();
   const { mutate, isLoading } = api.post.create.useMutation({
     onSuccess: () => {
       setText("");
-      void ctx.post.getAll.invalidate();
+      !slug
+        ? void ctx.post.getAll.invalidate()
+        : void ctx.post.getUserPosts.invalidate();
     },
     onError: (e) => {
       const errorMessage = e.data?.zodError?.fieldErrors.content;

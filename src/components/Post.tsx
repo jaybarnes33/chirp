@@ -1,9 +1,10 @@
 import type { RouterOutputs } from "@/utils/api";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import Image from "next/image";
+
 import Link from "next/link";
 import React from "react";
+import Avatar from "./Avatar";
 
 dayjs.extend(relativeTime);
 const Post = ({ post }: { post: RouterOutputs["post"]["getAll"][number] }) => {
@@ -13,15 +14,7 @@ const Post = ({ post }: { post: RouterOutputs["post"]["getAll"][number] }) => {
       key={post.post.id}
     >
       <Link href={`/@${post.author?.username as string}`}>
-        {post.author && (
-          <Image
-            width={50}
-            height={50}
-            className="h-10 w-10"
-            src={post.author?.profileImageUrl}
-            alt={(post.author.username as string) + "'s avatar"}
-          />
-        )}
+        {post.author && <Avatar user={post.author} size={40} />}
       </Link>
       <div className="flex flex-col">
         <div className="flex gap-2 text-sm text-slate-300">
