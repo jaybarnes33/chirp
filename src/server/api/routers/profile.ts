@@ -5,15 +5,8 @@ import { clerkClient } from "@clerk/nextjs/server";
 import { TRPCError } from "@trpc/server";
 
 export const profileRouter = createTRPCRouter({
-  getAll: publicProcedure.query(async ({ ctx }) => {
-    const posts = await ctx.prisma.post.findMany({
-      take: 100,
-      orderBy: { createdAt: "desc" },
-    });
-
-    const users = await clerkClient.users.getUserList({
-      userId: posts.map((post) => post.authorId),
-    });
+  getAll: publicProcedure.query(async () => {
+    const users = await clerkClient.users.getUserList({ limit: 20 });
 
     return users;
   }),

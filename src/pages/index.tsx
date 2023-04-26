@@ -18,8 +18,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="min-h-screen w-full border-slate-400 md:max-w-2xl md:border-x">
-        {!user ? <SignInButton /> : <SignOutButton />}
+      <div className="min-h-screen w-full border-slate-400 lg:max-w-2xl lg:border-x">
         {user?.username && <CreatePost />}
         <Feed />
       </div>

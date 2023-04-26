@@ -10,7 +10,7 @@ dayjs.extend(relativeTime);
 const Post = ({ post }: { post: RouterOutputs["post"]["getAll"][number] }) => {
   return (
     <div
-      className="flex w-full gap-2 rounded-sm border-b  border-slate-400 px-2 py-5   "
+      className="flex w-full gap-2 rounded-sm border-b  border-slate-400 px-2 py-5  hover:bg-neutral-950 "
       key={post.post.id}
     >
       <Link href={`/@${post.author?.username as string}`}>
