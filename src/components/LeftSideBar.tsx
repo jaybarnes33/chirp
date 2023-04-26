@@ -19,7 +19,7 @@ const LeftSideBar = () => {
 
   const { user } = useUser();
   return (
-    <div className="fixed  bottom-0 w-full bg-black px-4 py-3  lg:top-0 lg:h-screen lg:max-w-[300px]  lg:py-16 lg:pl-20">
+    <div className=" fixed bottom-0 hidden  w-full bg-black px-4 py-3 lg:top-0  lg:block lg:h-screen lg:max-w-[300px]  lg:py-16 lg:pl-20">
       <p className="absolute top-5 hidden text-3xl font-bold text-blue-500 lg:flex">
         <FaKiwiBird />
       </p>
